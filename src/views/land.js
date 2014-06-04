@@ -1,28 +1,25 @@
 var World = require('../stores/world');
 var Game = require('../stores/game');
+var imageLoader = require('../../lib/imageLoader');
 
-var landLoaded = false;
-var land = new Image();
-land.onload = function() {
-	landLoaded = true;
-};
-land.src = "assets/land.png";
+var loaded = imageLoader('assets/land.png');
 
 module.exports = {
 	draw(ctx, width, height) {
-		if (!landLoaded) return;
-		ctx.save();
-
 		var elevation = World.get('elevation');
 
-		ctx.save();
-		ctx.translate(-Game.get('scroll'), height - elevation);
+		loaded.then(function(image) {
+			ctx.save();
 
-		var landPattern = ctx.createPattern(land, 'repeat');
-		ctx.beginPath();
-		ctx.rect(0, 0, width + Game.get('scroll'), elevation);
-		ctx.fillStyle = landPattern;
-		ctx.fill();
-		ctx.restore();
+			var pattern = ctx.createPattern(image, 'repeat');
+
+			ctx.translate(-Game.get('scroll'), height - elevation);
+			ctx.beginPath();
+			ctx.rect(0, 0, width + Game.get('scroll'), image.height);
+			ctx.fillStyle = pattern;
+			ctx.fill();
+
+			ctx.restore();
+		});
 	}
 };

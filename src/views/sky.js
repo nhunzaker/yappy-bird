@@ -1,28 +1,24 @@
 var World = require('../stores/world');
 
-var skyLoaded = false;
-var sky = new Image();
-sky.onload = function() {
-	skyLoaded = true;
-};
-sky.src = "assets/sky.png";
+var loaded = imageLoader('assets/land.png');
 
 module.exports = {
 	draw: function(ctx, width, height) {
-		if (!skyLoaded) return;
-		ctx.save();
-
 		var elevation = World.get('elevation');
 
-		ctx.save();
-		ctx.translate(0, (height - elevation) - sky.height);
+		loaded.then(function(image) {
+			ctx.save();
+			ctx.translate(0, (height - elevation) - image.height);
 
-		var skyPattern = ctx.createPattern(sky, 'repeat');
-		ctx.beginPath();
-		ctx.rect(0, 0, width, sky.height);
-		ctx.fillStyle = skyPattern;
-		ctx.fill();
-		ctx.closePath();
-		ctx.restore();
+			var pattern = ctx.createPattern(image, 'repeat');
+
+			ctx.beginPath();
+			ctx.rect(0, 0, width, sky.height);
+			ctx.fillStyle = pattern;
+			ctx.fill();
+			ctx.closePath();
+
+			ctx.restore();
+		});
 	}
 };

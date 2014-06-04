@@ -14,7 +14,7 @@ module.exports = {
 	interval : 100,
 	then     : Date.now(),
 
-	draw: function(ctx) {
+	draw(ctx) {
 		var { height, location, width } = Player.get();
 
 		preload.then(function(images) {
