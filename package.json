@@ -1,0 +1,15 @@
+{
+  "name": "yappy_bird",
+  "version": "0.0.0",
+  "description": "Sound based flappy bird clone",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "watchify . -o bundle.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "es6-promise": "^1.0.0"
+  },
+  "author": "Nate Hunzaker",
+  "license": "MIT"
+}
