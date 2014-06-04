@@ -7,11 +7,38 @@
 			body {
 				background: #3BC1C8;
 				background-size: auto 200px;
+				font-family: monospace;
+				margin: 0;
+			}
+
+			.hud {
+				background: rgba(0, 0, 0, 0.2);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				bottom: 20px;
+				box-shadow: 1p 1px 2px rgba(0, 0, 0, 0.5);
+				color: #fff;
+				font-size: 14px;
+				left: 20px;
+				line-height: 2;
+				padding: 15px;
+				position: absolute;
+				text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+				width: 320px;
+			}
+
+			p {
 				margin: 0;
 			}
 		</style>
 	</head>
 	<body>
+		<div class="hud">
+			<p><b>Instructions:</b></p>
+			<p>
+				Share your microphone and yell at the screen to make the bird jump!
+				(you can also cheat with the UP arrow)
+			</p>
+		</div>
 		<canvas width="500" height="400" id="canvas"></canvas>
 		<script src="bundle.js"></script>
 	</body>
