@@ -1,5 +1,5 @@
-var Store = require('../../lib/store');
-var Player = require('./Player');
+var Store  = require('../../lib/store');
+var Player = require('./player');
 
 var HEIGHT = window.innerHeight;
 var WIDTH = window.innerWidth;

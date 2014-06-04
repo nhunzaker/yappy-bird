@@ -3,7 +3,6 @@ var requestAnimationFrame = require('../../lib/requestAnimationFrame');
 var Player = require('../stores/player');
 var Game   = require('../stores/game');
 var Blocks = require('../stores/blocks');
-var World  = require('../stores/world');
 
 var PlayerActions = require('../actions/player');
 var GameActions   = require('../actions/game');
@@ -26,7 +25,7 @@ function draw() {
 
 	ctx.clearRect(0, 0, width, height);
 
-	Sky.draw(ctx, width, height);
+	Sky.draw(ctx);
 	PlayerView.draw(ctx);
 	MapView.draw(ctx, width, height);
 	Land.draw(ctx, width, height);

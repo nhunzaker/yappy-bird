@@ -1,11 +1,18 @@
-var Store = require('../../lib/store');
-var State = require('../state');
+var Store  = require('../../lib/store');
+var State  = require('../state');
+var Vector = require('../../lib/vector');
+
+var Player = require('./player');
+var Blocks = require('./blocks');
 
 var Game = Store.clone({
 	_data: {
-		lost    : false,
-		playing : false,
-		scroll  : 0
+		elevation    : 112,
+		lost         : false,
+		playing      : false,
+		scroll       : 0,
+		windowHeight : window.innerHeight,
+		windowWidth  : window.innerWidth
 	},
 
 	play() {
@@ -21,7 +28,31 @@ var Game = Store.clone({
 	},
 
 	update() {
+		if (this.checkCollisions()) {
+			Game.set('lost', Date.now());
+		}
+
 		Game.set('scroll', Game.get('scroll') + 3);
+	},
+
+	checkCollisions: function() {
+		var { location, width, height } = Player.get();
+		var { x, y } = location;
+		var blocks = Blocks.get('blocks');
+		var { scroll, windowHeight, elevation } = this._data;
+
+		if (y > windowHeight - elevation) return true;
+
+		for (var i = 0, len = blocks.length; i < len; i++) {
+			var b = blocks[i];
+
+			if (x + width < b.x - scroll)     continue;
+			if (x > (b.x + b.width) - scroll) continue;
+			if (y + height < b.y)             continue;
+			if (y > b.y + b.height)           continue;
+
+			return true;
+		}
 	}
 });
 
@@ -36,10 +67,6 @@ State.register({
 
 	GAME_TOGGLE() {
 		Game.toggle();
-	},
-
-	GAME_LOST() {
-		Game.set('lost', Date.now());
 	},
 
 	GLOBAL_UPDATE() {

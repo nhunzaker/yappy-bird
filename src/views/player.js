@@ -2,10 +2,10 @@ var Player      = require("../stores/player");
 var imageLoader = require('../../lib/imageLoader');
 
 var preload = imageLoader([
-	'/assets/bird-01.png',
-	'/assets/bird-02.png',
-	'/assets/bird-03.png',
-	'/assets/bird-04.png'
+	'assets/bird-01.png',
+	'assets/bird-02.png',
+	'assets/bird-03.png',
+	'assets/bird-04.png'
 ]);
 
 module.exports = {

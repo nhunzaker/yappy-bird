@@ -4,7 +4,8 @@ var AudioContext = require('../../lib/audioContext');
 var SAMPLES   = 256;
 var audio     = new AudioContext();
 var volume    = new Uint8Array(SAMPLES);
-var analyser = null;
+var threshold = 40;
+var analyser  = null;
 
 var PlayerActions = require('../actions/player');
 var GameActions   = require('../actions/game');
@@ -17,12 +18,12 @@ function analyze() {
 		a += volume[i];
 	}
 
-	if ((a / volume.length) > 10) PlayerActions.jump();
+	if ((a / volume.length) > threshold) PlayerActions.jump();
 
 	requestAnimationFrame(analyze);
 }
 
-navigator.webkitGetUserMedia({ audio: true}, function(stream) {
+navigator.webkitGetUserMedia({ audio: true}, (stream) => {
 	GameActions.play();
 
 	var mediaStreamSource = audio.createMediaStreamSource(stream);
@@ -34,7 +35,7 @@ navigator.webkitGetUserMedia({ audio: true}, function(stream) {
 	mediaStreamSource.connect(analyser);
 
 	analyze();
-}, function(err) {
+}, (err) => {
 	alert("Ah snap, something went wrong accessing your microphone.");
 	console.log(err);
 });
