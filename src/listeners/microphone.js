@@ -23,7 +23,7 @@ function analyze() {
 	requestAnimationFrame(analyze);
 }
 
-navigator.webkitGetUserMedia({ audio: true}, (stream) => {
+getUserMedia({ audio: true}, (stream) => {
 	GameActions.play();
 
 	var mediaStreamSource = audio.createMediaStreamSource(stream);
