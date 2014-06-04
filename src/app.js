@@ -1,18 +1,12 @@
-var Game          = require('./stores/game');
-var Scene         = require('./views/scene');
-var PlayerActions = require('./actions/player');
-var GameActions   = require('./actions/game');
+var Game = require('./stores/game');
+var Scene = require('./views/scene');
+var State = require('./state');
+var World = require('./stores/world');
 
-//require('./listeners/microphone');
 require('./listeners/keyboard');
+//require('./listeners/microphone');
 
-var loop = () => {
-	if (Game.get('playing')) {
-		PlayerActions.update();
-		GameActions.update();
-	}
-
+(function loop () {
+	if (Game.get('playing') && !Game.get('hasLost')) State.dispatch('GLOBAL_UPDATE');
 	requestAnimationFrame(loop);
-};
-
-loop();
+}())

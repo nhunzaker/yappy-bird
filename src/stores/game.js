@@ -3,6 +3,7 @@ var State = require('../state');
 
 var Game = Store.clone({
 	_data: {
+		lost    : false,
 		playing : false,
 		scroll  : 0
 	},
@@ -37,7 +38,11 @@ State.register({
 		Game.toggle();
 	},
 
-	GAME_UPDATE() {
+	GAME_LOST() {
+		Game.set('lost', Date.now());
+	},
+
+	GLOBAL_UPDATE() {
 		Game.update();
 	}
 });

@@ -15,11 +15,11 @@ module.exports = {
 		var elevation = World.get('elevation');
 
 		ctx.save();
-		ctx.translate(0, (height - elevation) - 109);
+		ctx.translate(0, (height - elevation) - sky.height);
 
 		var skyPattern = ctx.createPattern(sky, 'repeat');
 		ctx.beginPath();
-		ctx.rect(0, 0, width, 109);
+		ctx.rect(0, 0, width, sky.height);
 		ctx.fillStyle = skyPattern;
 		ctx.fill();
 		ctx.closePath();

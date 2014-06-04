@@ -22,7 +22,6 @@ function draw() {
 	ctx.save();
 
 	var { width, height } = canvas;
-	var isBlocking = Blocks.checkCollision(Game.get('scroll'), Player.get('y'));
 	var scroll = Game.get('scroll');
 
 	ctx.clearRect(0, 0, width, height);
@@ -32,16 +31,17 @@ function draw() {
 	MapView.draw(ctx, width, height);
 	Land.draw(ctx, width, height);
 
-	if (isBlocking) GameActions.pause();
+	var isPlaying = Game.get('playing');
+	var hasLost = Game.get('lost');
 
-	if (!Game.get('playing')) {
+	if (!isPlaying || hasLost) {
 		ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
 		ctx.fillRect(0, 0, width, height)
 
 		ctx.font = "36pt Monospace";
 		ctx.textAlign = "center";
 		ctx.fillStyle = "#fff";
-		ctx.fillText("PAUSED", width / 2, height / 2);
+		ctx.fillText(hasLost ? "GAME OVER" : "PAUSED", width / 2, height / 2);
 	}
 
 	ctx.restore();

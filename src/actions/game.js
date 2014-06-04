@@ -13,7 +13,7 @@ module.exports = {
 		State.dispatch('GAME_TOGGLE');
 	},
 
-	update() {
-		State.dispatch('GAME_UPDATE');
+	lost() {
+		State.dispatch('GAME_LOST');
 	}
 };

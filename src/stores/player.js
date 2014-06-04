@@ -1,23 +1,17 @@
 var Store  = require('../../lib/store')
 var State  = require('../state');
-var World  = require('./world');
 var Vector = require('../../lib/vector');
-
-var truncate = function(n, min, max) {
-	return Math.max(min, Math.min(n, max))
-};
 
 var gravity = new Vector(0, 0.15);
 
 var Player = Store.clone({
 	_data: {
 		accel    : new Vector(0, 0),
-		color    : "#cc3333",
-		height   : 20,
-		maxSpeed : 10,
+		height   : 24,
+		maxSpeed : 6,
 		location : new Vector(100, window.innerHeight / 2),
 		velocity : new Vector(0, 0),
-		width    : 20
+		width    : 34
 	},
 
 	update: function() {
@@ -37,7 +31,7 @@ var Player = Store.clone({
 
 		velocity.y = Math.min(velocity.y, 0);
 
-		accel.add(new Vector(0, -4))
+		accel.add(new Vector(0, -2))
 	}
 });
 
@@ -46,7 +40,7 @@ State.register({
 		Player.jump();
 	},
 
-	PLAYER_UPDATE: function() {
+	GLOBAL_UPDATE: function() {
 		Player.update();
 	}
 });

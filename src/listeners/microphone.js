@@ -17,7 +17,7 @@ function analyze() {
 		a += volume[i];
 	}
 
-	if ((a / volume.length) > 40) PlayerActions.jump();
+	if ((a / volume.length) > 10) PlayerActions.jump();
 
 	requestAnimationFrame(analyze);
 }
