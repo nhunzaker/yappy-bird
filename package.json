@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "watchify . -o bundle.js -v -d",
+    "build": "browserify . | uglifyjs -m -c > bundle.js",
     "test": "jest"
   },
   "dependencies": {
