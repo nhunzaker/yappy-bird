@@ -4,7 +4,7 @@ var Keys = require('../constants/keys');
 
 var { UP, ESCAPE } = Keys;
 
-window.addEventListener('keyup', (e) => {
+window.addEventListener('keydown', (e) => {
 	switch (e.which) {
 		case UP:
 			PlayerActions.jump();

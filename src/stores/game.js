@@ -10,6 +10,7 @@ var Game = Store.clone({
 		elevation    : 112,
 		lost         : false,
 		playing      : false,
+		startTime    : Date.now(),
 		scroll       : 0,
 		windowHeight : window.innerHeight,
 		windowWidth  : window.innerWidth
@@ -17,6 +18,7 @@ var Game = Store.clone({
 
 	play() {
 		Game.set('playing', true);
+		Game.set('startTime', Date.now());
 	},
 
 	pause() {
@@ -32,7 +34,9 @@ var Game = Store.clone({
 			Game.set('lost', Date.now());
 		}
 
-		Game.set('scroll', Game.get('scroll') + 3);
+		var step = Math.max(3, (Date.now() - Game.get('startTime')) / 15000) | 0;
+
+		Game.set('scroll', Game.get('scroll') + step);
 	},
 
 	checkCollisions: function() {

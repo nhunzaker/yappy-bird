@@ -37,7 +37,7 @@ for (var x = 0; x < ROWS; x++) {
 		height: HEIGHT - (opening + 200),
 		width: pipeWidth,
 		x: offset + x * separation,
-		y: opening + 170
+		y: opening + 270
 	});
 }
 

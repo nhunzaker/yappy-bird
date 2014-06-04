@@ -44,6 +44,10 @@ function draw() {
 	}
 
 	ctx.restore();
+
+	ctx.font = "36pt monospace";
+	ctx.fillStyle = "#fff";
+	ctx.fillText(Game.get('scroll'), 20, 40);
 }
 
 var frame = requestAnimationFrame(function loop() {

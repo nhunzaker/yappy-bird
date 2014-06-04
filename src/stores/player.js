@@ -2,7 +2,7 @@ var Store  = require('../../lib/store')
 var State  = require('../state');
 var Vector = require('../../lib/vector');
 
-var gravity = new Vector(0, 0.15);
+var gravity = new Vector(0, 0.25);
 
 var Player = Store.clone({
 	_data: {
@@ -31,7 +31,7 @@ var Player = Store.clone({
 
 		velocity.y = Math.min(velocity.y, 0);
 
-		accel.add(new Vector(0, -2))
+		accel.add(new Vector(0, -1))
 	}
 });
 
