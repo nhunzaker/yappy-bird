@@ -4,12 +4,36 @@
   "description": "Sound based flappy bird clone",
   "main": "src/app.js",
   "scripts": {
-    "start": "watchify . -o bundle.js",
+    "start": "watchify . -o bundle.js -v -d",
     "test": "jest"
   },
   "dependencies": {
     "es6-promise": "^1.0.0"
   },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true,
+          "extension": [
+            "jsx",
+            "js"
+          ],
+          "visitors": [
+            "es6-destructuring-jstransform",
+            "jstransform/visitors/es6-arrow-function-visitors",
+            "jstransform/visitors/es6-class-visitors",
+            "jstransform/visitors/es6-object-concise-method-visitors"
+          ]
+        }
+      ]
+    ]
+  },
   "author": "Nate Hunzaker",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "reactify": "^0.13.1",
+    "es6-destructuring-jstransform": "^0.1.0"
+  }
 }

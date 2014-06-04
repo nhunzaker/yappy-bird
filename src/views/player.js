@@ -10,12 +10,13 @@ img.src = '/assets/bird.png';
 module.exports = {
 	draw: function(ctx) {
 		var data = Player.get();
+		var { location } = data;
 
 		if (loaded) {
-			ctx.drawImage(img, data.x - data.width, data.y, 68, 48);
+			ctx.drawImage(img, location.x - data.width, location.y);
 		} else {
 			ctx.fillStyle = data.color;
-			ctx.fillRect(data.x - data.width, data.y, data.width, data.height);
+			ctx.fillRect(location.x - data.width, location.y, data.width, data.height);
 		}
 	}
 };

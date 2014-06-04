@@ -1,15 +1,19 @@
 var State = require('../state');
 
 module.exports = {
-	play: function() {
+	play() {
 		State.dispatch('GAME_PLAY');
 	},
 
-	pause: function() {
+	pause() {
 		State.dispatch('GAME_PAUSE');
 	},
 
-	update: function() {
+	toggle() {
+		State.dispatch('GAME_TOGGLE');
+	},
+
+	update() {
 		State.dispatch('GAME_UPDATE');
 	}
 };

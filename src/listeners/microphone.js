@@ -1,13 +1,13 @@
-var getUserMedia = require('../lib/getUserMedia');
-var AudioContext = require('../lib/audioContext');
+var getUserMedia = require('../../lib/getUserMedia');
+var AudioContext = require('../../lib/audioContext');
 
-var SAMPLES   = 1024;
+var SAMPLES   = 256;
 var audio     = new AudioContext();
 var volume    = new Uint8Array(SAMPLES);
 var analyser = null;
 
-var PlayerActions     = require('./actions/player');
-var GameActions = require('./actions/game');
+var PlayerActions = require('../actions/player');
+var GameActions   = require('../actions/game');
 
 function analyze() {
 	analyser.getByteFrequencyData(volume);

@@ -1,46 +1,43 @@
-var Store = require('../../lib/store')
-var State = require('../state');
-
-var _data = {
-	color: "#cc3333",
-	height: 20,
-	width: 20,
-	ay: 0,
-	speed: 0,
-	x: 100,
-	y: window.innerHeight / 2
-}
+var Store  = require('../../lib/store')
+var State  = require('../state');
+var World  = require('./world');
+var Vector = require('../../lib/vector');
 
 var truncate = function(n, min, max) {
 	return Math.max(min, Math.min(n, max))
-}
+};
+
+var gravity = new Vector(0, 0.15);
 
 var Player = Store.clone({
-	get: function(key) {
-		return key? _data[key] : _data;
+	_data: {
+		accel    : new Vector(0, 0),
+		color    : "#cc3333",
+		height   : 20,
+		maxSpeed : 10,
+		location : new Vector(100, window.innerHeight / 2),
+		velocity : new Vector(0, 0),
+		width    : 20
 	},
 
 	update: function() {
-		var y     = this.get('y');
-		var ay    = this.get('ay');
-		var speed = this.get('speed');
+		var { accel, location, maxSpeed, velocity } = this._data;
 
-		ay += 0.08;
+		accel.add(gravity);
 
-		speed = truncate(speed + ay, -5, 10);
+		velocity.add(accel);
+		location.add(velocity);
+		accel.mult(0);
 
-		this.set('speed', speed);
-		this.set('ay', ay);
-		this.set('y', this.get('y') + speed);
+		velocity.limit(maxSpeed);
 	},
 
 	jump: function() {
-		this.set('ay', -1);
-	},
+		var { velocity, accel } = this._data;
 
-	set: function(key, value) {
-		_data[key] = value;
-		this.emitChange();
+		velocity.y = Math.min(velocity.y, 0);
+
+		accel.add(new Vector(0, -4))
 	}
 });
 

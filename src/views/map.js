@@ -1,17 +1,15 @@
 var Blocks = require("../stores/blocks");
 var Game   = require('../stores/game');
-
-var cache    = document.createElement('canvas');
-cache.height = Blocks.get('height');
-cache.width  = Blocks.totalWidth();
+var World  = require('../stores/world');
 
 module.exports = {
-	isCached: false,
+	draw(ctx, width, height) {
+		var elevation = World.get('elevation');
 
-	cache: function() {
-		var ctx = cache.getContext('2d');
+		ctx.save();
 
-		ctx.clearRect(0, 0, cache.width, cache.height);
+		ctx.translate(-Game.get('scroll'), 0);
+
 		ctx.fillStyle = "#69BF4C";
 		ctx.lineWidth = 2;
 		ctx.strokeStyle = "#543A46";
@@ -21,11 +19,6 @@ module.exports = {
 			ctx.strokeRect.apply(ctx, entity);
 		});
 
-		this.isCached = true;
-	},
-
-	draw: function(ctx) {
-		if (!this.isCached) this.cache();
-		ctx.drawImage(cache, -Game.get('scroll'), 0);
-	}
-}
+		ctx.restore();
+ 	}
+};

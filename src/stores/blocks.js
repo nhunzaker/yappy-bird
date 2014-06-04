@@ -26,22 +26,20 @@ for (var i = 0; i < ROWS; i++) {
 
 for (var x = 0; x < ROWS; x++) for (var y = 0; y < COLS; y++) {
 	if (_data.map[x][y] === 0) {
-		_data.blocks.push([x * SCALEX, y * SCALEY, SCALEY, SCALEY]);
+		_data.blocks.push([500 + x * SCALEX, y * SCALEY, SCALEY, SCALEY]);
 	}
 }
 
 var Blocks = Store.clone({
-	get: function(key) {
-		return key? _data[key] : _data;
-	},
+	_data: _data,
 
 	totalWidth: function() {
 		return ROWS * SCALEX + SCALEY;
 	},
 
 	closest: function(scroll) {
-		var blocks = _data.blocks;
-		var scaleY = _data.scaleY;
+		var blocks = this._data.blocks;
+		var scaleY = this._data.scaleY;
 		var matches = [];
 		var ent;
 

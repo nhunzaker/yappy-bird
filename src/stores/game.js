@@ -1,44 +1,43 @@
-var Store = require('../../lib/store')
+var Store = require('../../lib/store');
 var State = require('../state');
 
-var _data = {
-	playing : false,
-	scroll  : -500
-}
-
 var Game = Store.clone({
-	get: function(key) {
-		return key? _data[key] : _data;
+	_data: {
+		playing : false,
+		scroll  : 0
 	},
 
-	play: function() {
-		Game.set("playing", true);
+	play() {
+		Game.set('playing', true);
 	},
 
-	pause: function() {
-		Game.set("playing", false);
+	pause() {
+		Game.set('playing', false);
 	},
 
-	update: function() {
+	toggle() {
+		Game.set('playing', !Game.get('playing'));
+	},
+
+	update() {
 		Game.set('scroll', Game.get('scroll') + 3);
-	},
-
-	set: function(key, value) {
-		_data[key] = value;
-		this.emitChange();
 	}
 });
 
 State.register({
-	GAME_PLAY: function() {
+	GAME_PLAY() {
 		Game.play();
 	},
 
-	GAME_PAUSE: function() {
+	GAME_PAUSE() {
 		Game.pause();
 	},
 
-	GAME_UPDATE: function() {
+	GAME_TOGGLE() {
+		Game.toggle();
+	},
+
+	GAME_UPDATE() {
 		Game.update();
 	}
 });
