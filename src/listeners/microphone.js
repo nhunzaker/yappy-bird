@@ -11,31 +11,31 @@ var PlayerActions = require('../actions/player');
 var GameActions   = require('../actions/game');
 
 function analyze() {
-	analyser.getByteFrequencyData(volume);
+  analyser.getByteFrequencyData(volume);
 
-	var a = 0;
-	for (var i = 0, len = volume.length; i < len; i++) {
-		a += volume[i];
-	}
+  var a = 0;
+  for (var i = 0, len = volume.length; i < len; i++) {
+    a += volume[i];
+  }
 
-	if ((a / volume.length) > threshold) PlayerActions.jump();
+  if ((a / volume.length) > threshold) PlayerActions.jump();
 
-	requestAnimationFrame(analyze);
+  requestAnimationFrame(analyze);
 }
 
 getUserMedia({ audio: true}, (stream) => {
-	GameActions.play();
+  GameActions.play();
 
-	var mediaStreamSource = audio.createMediaStreamSource(stream);
+  var mediaStreamSource = audio.createMediaStreamSource(stream);
 
-	analyser = audio.createAnalyser();
+  analyser = audio.createAnalyser();
     analyser.fftSize = SAMPLES;
-	analyser.smoothingTimeConstant = 0.4;
+  analyser.smoothingTimeConstant = 0.4;
 
-	mediaStreamSource.connect(analyser);
+  mediaStreamSource.connect(analyser);
 
-	analyze();
+  analyze();
 }, (err) => {
-	alert("Ah snap, something went wrong accessing your microphone.");
-	console.log(err);
+  alert("Ah snap, something went wrong accessing your microphone.");
+  console.log(err);
 });

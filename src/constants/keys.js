@@ -1,4 +1,4 @@
 module.exports = {
-	ESCAPE: 27,
-	UP: 38
+  ESCAPE: 27,
+  UP: 38
 };

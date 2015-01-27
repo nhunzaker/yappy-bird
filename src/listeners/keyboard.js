@@ -5,12 +5,12 @@ var Keys = require('../constants/keys');
 var { UP, ESCAPE } = Keys;
 
 window.addEventListener('keydown', (e) => {
-	switch (e.which) {
-		case UP:
-			PlayerActions.jump();
-			break;
-		case ESCAPE:
-			GameActions.toggle();
-			break;
-	}
+  switch (e.which) {
+    case UP:
+      PlayerActions.jump();
+      break;
+    case ESCAPE:
+      GameActions.toggle();
+      break;
+  }
 });

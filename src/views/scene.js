@@ -18,39 +18,39 @@ var Land = require('./land');
 var Sky  = require('./sky');
 
 function draw() {
-	ctx.save();
+  ctx.save();
 
-	var { width, height } = canvas;
-	var scroll = Game.get('scroll');
+  var { width, height } = canvas;
+  var scroll = Game.get('scroll');
 
-	ctx.clearRect(0, 0, width, height);
+  ctx.clearRect(0, 0, width, height);
 
-	Sky.draw(ctx);
-	PlayerView.draw(ctx);
-	MapView.draw(ctx, width, height);
-	Land.draw(ctx, width, height);
+  Sky.draw(ctx);
+  PlayerView.draw(ctx);
+  MapView.draw(ctx, width, height);
+  Land.draw(ctx, width, height);
 
-	var isPlaying = Game.get('playing');
-	var hasLost = Game.get('lost');
+  var isPlaying = Game.get('playing');
+  var hasLost = Game.get('lost');
 
-	if (!isPlaying || hasLost) {
-		ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-		ctx.fillRect(0, 0, width, height)
+  if (!isPlaying || hasLost) {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(0, 0, width, height)
 
-		ctx.font = "36pt Monospace";
-		ctx.textAlign = "center";
-		ctx.fillStyle = "#fff";
-		ctx.fillText(hasLost ? "GAME OVER" : "PAUSED", width / 2, height / 2);
-	}
+    ctx.font = "36pt Monospace";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#fff";
+    ctx.fillText(hasLost ? "GAME OVER" : "PAUSED", width / 2, height / 2);
+  }
 
-	ctx.restore();
+  ctx.restore();
 
-	ctx.font = "36pt monospace";
-	ctx.fillStyle = "#fff";
-	ctx.fillText(Game.get('scroll'), 20, 40);
+  ctx.font = "36pt monospace";
+  ctx.fillStyle = "#fff";
+  ctx.fillText(Game.get('scroll'), 20, 40);
 }
 
 var frame = requestAnimationFrame(function loop() {
-	frame = requestAnimationFrame(loop);
-	draw();
+  frame = requestAnimationFrame(loop);
+  draw();
 });

@@ -6,6 +6,6 @@ require('./listeners/keyboard');
 require('./listeners/microphone');
 
 (function loop () {
-	if (Game.get('playing') && !Game.get('lost')) State.dispatch('GLOBAL_UPDATE');
-	requestAnimationFrame(loop);
+  if (Game.get('playing') && !Game.get('lost')) State.dispatch('GLOBAL_UPDATE');
+  requestAnimationFrame(loop);
 }())
