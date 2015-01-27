@@ -1,19 +1,21 @@
-var State = require('../state');
+var Dispatcher = require('../dispatcher');
 
 module.exports = {
+
 	play() {
-		State.dispatch('GAME_PLAY');
+		Dispatcher.dispatch('GAME_PLAY');
 	},
 
 	pause() {
-		State.dispatch('GAME_PAUSE');
+		Dispatcher.dispatch('GAME_PAUSE');
 	},
 
 	toggle() {
-		State.dispatch('GAME_TOGGLE');
+		Dispatcher.dispatch('GAME_TOGGLE');
 	},
 
 	lost() {
-		State.dispatch('GAME_LOST');
+		Dispatcher.dispatch('GAME_LOST');
 	}
+
 };

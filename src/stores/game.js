@@ -1,6 +1,6 @@
-var Store  = require('../../lib/store');
-var State  = require('../state');
-var Vector = require('../../lib/vector');
+var Store      = require('../../lib/store');
+var Dispatcher = require('../dispatcher');
+var Vector     = require('../../lib/vector');
 
 var Player = require('./player');
 var Blocks = require('./blocks');
@@ -60,7 +60,7 @@ var Game = Store.clone({
   }
 });
 
-State.register({
+Dispatcher.register({
   GAME_PLAY() {
     Game.play();
   },

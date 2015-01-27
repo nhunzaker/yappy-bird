@@ -34,7 +34,8 @@
   "author": "Nate Hunzaker",
   "license": "MIT",
   "devDependencies": {
-    "reactify": "^0.13.1",
-    "es6-destructuring-jstransform": "^0.1.0"
+    "es6-destructuring-jstransform": "^0.1.0",
+    "react": "^0.12.2",
+    "reactify": "^0.13.1"
   }
 }

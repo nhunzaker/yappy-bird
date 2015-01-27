@@ -1,7 +1,9 @@
-var State = require('../state');
+var Dispatcher = require('../dispatcher');
 
 module.exports = {
+
 	jump: function() {
-		State.dispatch('PLAYER_JUMP');
+		Dispatcher.dispatch('PLAYER_JUMP');
 	}
+
 };

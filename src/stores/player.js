@@ -1,5 +1,5 @@
 var Store  = require('../../lib/store')
-var State  = require('../state');
+var Dispatcher  = require('../dispatcher');
 var Vector = require('../../lib/vector');
 
 var gravity = new Vector(0, 0.25);
@@ -35,7 +35,7 @@ var Player = Store.clone({
   }
 });
 
-State.register({
+Dispatcher.register({
   PLAYER_JUMP: function() {
     Player.jump();
   },

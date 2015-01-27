@@ -7,18 +7,22 @@ var volume    = new Uint8Array(SAMPLES);
 var threshold = 40;
 var analyser  = null;
 
-var PlayerActions = require('../actions/player');
 var GameActions   = require('../actions/game');
+var PlayerActions = require('../actions/player');
 
 function analyze() {
   analyser.getByteFrequencyData(volume);
 
   var a = 0;
-  for (var i = 0, len = volume.length; i < len; i++) {
+  var sample = volume.length;
+
+  for (var i = 0; i < sample; i++) {
     a += volume[i];
   }
 
-  if ((a / volume.length) > threshold) PlayerActions.jump();
+  if ((a / sample) > threshold) {
+    PlayerActions.jump();
+  }
 
   requestAnimationFrame(analyze);
 }
@@ -29,7 +33,7 @@ getUserMedia({ audio: true}, (stream) => {
   var mediaStreamSource = audio.createMediaStreamSource(stream);
 
   analyser = audio.createAnalyser();
-    analyser.fftSize = SAMPLES;
+  analyser.fftSize = SAMPLES;
   analyser.smoothingTimeConstant = 0.4;
 
   mediaStreamSource.connect(analyser);
